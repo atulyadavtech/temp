@@ -7,7 +7,7 @@ echo "Lock" >> /root/va-status.out
 cat /tmp/.provision.lock >> /root/va-status.out
 
 echo " Limits " >> /root/va-status.out
-/root/bin/oci limits value list  --all -c ocid1.tenancy.oc1..aaaaaaaav77ebb27qb7c2zdtiy77jsyt6tprog56e4by7dapqegiriqedotq  --name   vm-gpu3-4-count  --service-name compute  --output table --region $(cat /root/.scripts/region.out) >> /root/va-status.out
+/root/bin/oci limits value list  --all -c hhhhhhh  --name   vm-gpu3-4-count  --service-name compute  --output table --region $(cat /root/.scripts/region.out) >> /root/va-status.out
 
 echo " Running  " >> /root/va-status.out
 /root/bin/oci search resource structured-search --query-text "query instance resources " --output table --query "data.items[] .{InstanceName:\"display-name\",status: \"lifecycle-state\",Time: \"time-created\",AV: \"availability-domain\"}" >> /root/va-status.out
