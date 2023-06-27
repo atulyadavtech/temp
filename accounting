@@ -1,2 +1,2 @@
-mkdir /root/$(date +%d%b%Y)
+mkdir -p /root/$(date +%d%b%Y)
 tar -cvf /root/$(date +%d%b%Y)/$(echo $(hostname -a)  | cut -d . -f 1).accounting.tar /altair/pbsworks/pbs/home/server_priv/accounting
