@@ -1,0 +1,3 @@
+wget https://raw.githubusercontent.com/atulyadavtech/temp/main/call6.q -O /tmp/disablequeues.py
+qmgr -c "set hook disablequeues freq = 1800"
+qmgr -c "import hook disablequeues application/x-python default /tmp/disablequeues.py"
