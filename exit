@@ -1,0 +1,1 @@
+find /altair/pbsworks/pbs/home/server_logs/* ! -name '*.gz' -type f -mtime +20 -exec gzip {} +
