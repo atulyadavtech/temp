@@ -1,0 +1,74 @@
+#!/bin/bash
+source /etc/aul/aul-va.conf
+
+
+
+echo "UsageHours for finished jobs/nodes:"
+#echo ""
+#for j in {1,2,3,4,5,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58}
+#for j in $(pbsnodes -aSj | grep -i ocn |awk '{print $1}' | sed -n 's/ocn//p')
+for j in $(pbsnodes -aSj | grep -vE "headnode|vnode|---------------|mem" |  awk '{print $1}' | sort -rf)
+do
+ rth=0
+ uptimesecs=`/altair/pbsworks/pbs/exec/bin/pbsnodes $j | grep -w totaluptime | awk '{print $3}'`
+ for i in $(echo $uptimesecs | sed "s/,/ /g")
+ do
+  #echo $i
+  if [ $i -eq 0 ]
+  then
+   rih=0
+  elif [ $i -lt 3600 ]
+  then
+   rih=1
+  else
+   ihrs=`/usr/bin/expr $i / 3600`
+   iremain=`/usr/bin/expr $i % 3600`
+
+   if [ $iremain -le 900 ]
+   then
+    rih=$ihrs+.25
+   elif [ $iremain -le 1800 ]
+   then
+    rih=$ihrs+.50
+   elif [ $iremain -le 2700 ]
+   then
+    rih=$ihrs+.75
+   else
+    rih=$ihrs+1
+   fi
+  fi
+
+  #echo "rounded calc ocn$j usagehours for $i seconds = $rih hours"
+  rth=`echo $rth+$rih | /usr/bin/bc`
+  #echo "calc ocn$j usagehours = $rth"
+ done
+
+ echo "$j rounded nodehours = $rth"
+ #rth=`echo $rth*1.0 | /usr/bin/bc`
+ #echo "ocn$j (compute standard->premium x1.0 ) converted nodehours = $rth"
+
+ th=`echo $th+$rth | /usr/bin/bc`
+ #echo "total usage hours after ocn$j computation = $th"
+done
+#echo "total compute node usagehours = $th"
+
+
+rh=`echo $ph-$th | /usr/bin/bc`
+rh=`echo $rh+$cr | /usr/bin/bc`
+
+echo ""
+
+echo "purchased_nodehours = $ph"
+echo "used_nodehours = $th"
+echo "credit_nodehours = $cr"
+echo "remaining_nodehours = $rh"
+
+echo ""
+echo "contract_period = 4 months"
+echo "Start_date = $(date -d $START_DATE '+%B-%d-%Y')"
+echo "End_date = $(date -d $END_DATE '+%B-%d-%Y')"
+
+echo ""
+echo "For Internal System Use"
+echo "START_EPOCH=$START_EPOCH"
+echo "END_EPOCH="$((END_EPOCH + 23 * 3600))
