@@ -1,0 +1,11 @@
+cat /usr/local/bin/usagehrs | grep -i ph  -m 1 >> /etc/aul/aul-va.conf
+cat /usr/local/bin/usagehrs | grep -i threshold=  -m 1 >> /etc/aul/aul-va.conf
+cat /usr/local/bin/usagehrs | grep -i cr=  -m 1 >> /etc/aul/aul-va.conf
+cat /usr/local/bin/usagehrs | grep -i rh=  -m 1 >> /etc/aul/aul-va.conf
+cat /usr/local/bin/usagehrs | grep -i th=  -m 1 >> /etc/aul/aul-va.conf
+cat /usr/local/bin/usagehrs | grep -i ch=  -m 1 >> /etc/aul/aul-va.conf
+cat /usr/local/bin/usagehrs | grep -i rth=  -m 1 >> /etc/aul/aul-va.conf
+cat /usr/local/bin/usagehrs | grep -i rih=  -m 1 >> /etc/aul/aul-va.conf
+echo " " >> /etc/aul/aul-va.conf
+cat /usr/local/bin/usagehrs | grep -i "Start date = "  -m 1 >> /etc/aul/aul-va.conf
+cat /usr/local/bin/usagehrs | grep -i "End date ="  -m 1 >> /etc/aul/aul-va.conf
