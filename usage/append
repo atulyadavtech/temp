@@ -11,6 +11,7 @@ append_to_config() {
 
 # Create a new configuration file
 rm -rf "$config_file"
+mkdir -p /etc/aul/
 touch "$config_file"
 echo "#!/bin/bash" > "$config_file"
 
