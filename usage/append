@@ -40,3 +40,4 @@ echo "START_DATE=$(date -d "$(tac /usr/local/bin/usagehrs | grep -m 1 "Start dat
 append_to_config "Start date = "
 echo "END_DATE=$(date -d "$(tac /usr/local/bin/usagehrs | grep -m 1 "End date =" | cut -d '=' -f2 | awk -F '"' '{print $1}' )" '+%Y-%m-%d')" >> "$config_file"
 append_to_config "End date = "
+
