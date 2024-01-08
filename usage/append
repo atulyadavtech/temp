@@ -16,7 +16,7 @@ touch "$config_file"
 echo "#!/bin/bash" > "$config_file"
 
 # Append specific lines to the target file
-append_to_config "ph"
+append_to_config "ph="
 append_to_config "threshold="
 append_to_config "cr="
 append_to_config "rh="
@@ -40,4 +40,7 @@ echo "START_DATE=$(date -d "$(tac /usr/local/bin/usagehrs | grep -m 1 "Start dat
 append_to_config "Start date = "
 echo "END_DATE=$(date -d "$(tac /usr/local/bin/usagehrs | grep -m 1 "End date =" | cut -d '=' -f2 | awk -F '"' '{print $1}' )" '+%Y-%m-%d')" >> "$config_file"
 append_to_config "End date = "
+
+
+
 
