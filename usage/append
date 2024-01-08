@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Source file and target file paths
+usagehrs_file="/usr/local/bin/usagehrs"
+config_file="/etc/aul/aul-va.conf"
+
+# Function to append a line to the target file
+append_to_config() {
+    grep -i "$1" -m 1 "$usagehrs_file" >> "$config_file"
+}
+
+# Append specific lines to the target file
+append_to_config "ph"
+append_to_config "threshold="
+append_to_config "cr="
+append_to_config "rh="
+append_to_config "th="
+append_to_config "ch="
+append_to_config "rth="
+append_to_config "rih="
+echo " " >> "$config_file"
+append_to_config "Start date = "
+append_to_config "End date = "
