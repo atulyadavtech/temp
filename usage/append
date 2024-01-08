@@ -9,6 +9,11 @@ append_to_config() {
     grep -i "$1" -m 1 "$usagehrs_file" >> "$config_file"
 }
 
+# Create a new configuration file
+rm -rf "$config_file"
+touch "$config_file"
+echo "#!/bin/bash" > "$config_file"
+
 # Append specific lines to the target file
 append_to_config "ph"
 append_to_config "threshold="
