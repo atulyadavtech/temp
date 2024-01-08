@@ -25,5 +25,18 @@ append_to_config "ch="
 append_to_config "rth="
 append_to_config "rih="
 echo " " >> "$config_file"
+
+
+echo ": '" >> "$config_file"
+echo "Date and Time update" >> "$config_file"
+echo "Input Format yyyy-mm-dd" >> "$config_file"
+echo "Example" >> "$config_file"
+echo "Start_Date="2023-11-14"" >> "$config_file"
+echo "END_DATE="2023-11-30"" >> "$config_file"
+echo "'" >> "$config_file"
+
+echo " " >> "$config_file"
+echo "START_DATE=" >> "$config_file"
 append_to_config "Start date = "
+echo "END_DATE=" >> "$config_file"
 append_to_config "End date = "
