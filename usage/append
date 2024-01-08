@@ -28,17 +28,12 @@ echo " " >> "$config_file"
 
 
 echo ": '" >> "$config_file"
-echo "Date update, Input Format yyyy-mm-dd" >> "$config_file"
+echo "Input Date update >> "$config_file"
 echo "Example" >> "$config_file"
-echo "Start_Date=2023-11-14" >> "$config_file"
-echo "END_DATE=2023-11-30" >> "$config_file"
+echo " Start_Date=yyyy-mm-dd" >> "$config_file"
+echo " END_DATE=yyyy-mm-dd" >> "$config_file"
 echo "'" >> "$config_file"
 
 echo " " >> "$config_file"
 echo "START_DATE=$(date -d "$(cat /tmp/date | grep -m 1 "Start date =" | cut -d '=' -f2 | awk -F '"' '{print $1}' )" '+%Y-%m-%d')" >> "$config_file"
-append_to_config "Start date = "
 echo "END_DATE=$(date -d "$(cat /tmp/date | grep -m 1 "End date =" | cut -d '=' -f2 | awk -F '"' '{print $1}' )" '+%Y-%m-%d')" >> "$config_file"
-append_to_config "End date = "
-
-
-
