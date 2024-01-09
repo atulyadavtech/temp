@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Source file and target file paths
+usagehrs_file="/tmp/usagehrs-8Jan2024"
+config_file="/etc/aul/aul-va.conf"
+
+
+
+# Function to append a line to the target file
+append_to_config() {
+    grep -i "$1" -m 1 "$usagehrs_file" >> "$config_file"
+}
+
+# Create a new configuration file
+rm -rf "$config_file"
+mkdir -p /etc/aul/
+touch "$config_file"
+echo "#!/bin/bash" > "$config_file"
+
+# Append specific lines to the target file
+append_to_config "ph="
+append_to_config "threshold="
+append_to_config "cr="
+append_to_config "rh="
+append_to_config "th="
+append_to_config "ch="
+append_to_config "rth="
+append_to_config "rih="
+echo " " >> "$config_file"
+
+
+
+echo "#Date Input Example" >> "$config_file"
+echo "# Start_Date=yyyy-mm-dd" >> "$config_file"
+echo "# END_DATE=yyyy-mm-dd" >> "$config_file"
+echo " " >> "$config_file"
+
+
+
+echo "START_DATE=$(date -d "$(cat /tmp/date | grep "Start date =" | cut -d '=' -f2 | awk -F '"' '{print $1}' )" '+%Y-%m-%d')" >> "$config_file"
+echo "END_DATE=$(date -d "$(cat /tmp/date | grep  "End date =" | cut -d '=' -f2 | awk -F '"' '{print $1}' )" '+%Y-%m-%d')" >> "$config_file"
+
+
+echo " " >> "$config_file"
+echo " " >> "$config_file"
+echo "# Resource type" >> "$config_file"
+echo "config1=BM.Optimized3.36" >> "$config_file"
+echo "config2=VM.GPU3.1" >> "$config_file"
+echo "config3=VM.GPU2.1" >> "$config_file"
+echo "config4=VM.GPU3.4" >> "$config_file"
+echo "config5=BM.GPU4.8" >> "$config_file"
+
+echo " " >> "$config_file"
+echo " " >> "$config_file"
+echo "#AccountType(PostPaid/Prepaid/Internal/Test)" >> "$config_file"
+echo "#Account_Type=" >> "$config_file"
+echo "#Account_Name=" >> "$config_file"
+echo "#Account_URL=" >> "$config_file"
