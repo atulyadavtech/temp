@@ -16,6 +16,7 @@ END_EPOCH=$(date -u -d "${END_DATE}" +"%s")
 > /tmp/group1  #Compute
 > /tmp/group2  #RemoteViz
 > /tmp/group3  #GPUCompute
+qmgr -c " p  n @default" | grep -i resources_available.instancetype | grep -i $config0 | awk '{print $3}' >> /tmp/group1
 qmgr -c " p  n @default" | grep -i resources_available.instancetype | grep -i $config1 | awk '{print $3}' >> /tmp/group1
 qmgr -c " p  n @default" | grep -i resources_available.instancetype | grep -i $config2 | awk '{print $3}' >> /tmp/group2
 qmgr -c " p  n @default" | grep -i resources_available.instancetype | grep -i $config3 | awk '{print $3}' >> /tmp/group2
