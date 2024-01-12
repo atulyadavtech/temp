@@ -38,7 +38,8 @@ echo "rhg=0">> "$config_file"
 echo "rthg=0">> "$config_file"
 echo "rihg=0">> "$config_file"
 
-
+echo " " >> "$config_file"
+echo " " >> "$config_file"
 echo "#Date Input Example" >> "$config_file"
 echo "# Start_Date=yyyy-mm-dd" >> "$config_file"
 echo "# END_DATE=yyyy-mm-dd" >> "$config_file"
@@ -52,11 +53,14 @@ echo "END_DATE=$(date -d "$(cat /tmp/date | grep  "End date =" | cut -d '=' -f2 
 echo " " >> "$config_file"
 echo " " >> "$config_file"
 echo "# Resource type" >> "$config_file"
+echo "config0=BM.HPC2.36" >> "$config_file"
 echo "config1=BM.Optimized3.36" >> "$config_file"
 echo "config2=VM.GPU3.1" >> "$config_file"
 echo "config3=VM.GPU2.1" >> "$config_file"
 echo "config4=VM.GPU3.4" >> "$config_file"
 echo "config5=BM.GPU4.8" >> "$config_file"
+
+
 
 echo " " >> "$config_file"
 echo " " >> "$config_file"
