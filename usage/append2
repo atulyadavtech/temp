@@ -30,7 +30,7 @@ append_to_config "rth="
 append_to_config "rih="
 echo " " >> "$config_file"
 
-echo "#For GPU Node
+echo "#For GPU Node" >> "$config_file"
 echo "phg=0">> "$config_file
 echo "thg=0">> "$config_file
 echo "crg=0">> "$config_file
