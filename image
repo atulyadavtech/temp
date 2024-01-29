@@ -1,0 +1,1 @@
+oci compute image get --image-id $(cat /tmp/headnode-image3) > /tmp/tmp/headnode-image-4
