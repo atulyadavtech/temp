@@ -1,0 +1,22 @@
+#!/bin/bash
+>/usr/bin/compute-scr.out
+echo "Node   Filesystem   Type       Size  Used Avail Use%  Mounted on" > /usr/bin/compute-scr.out;
+export WCOLL='/etc/pdsh/machine'
+/usr/bin/pdsh df -lTh | grep -i scr >> /usr/bin/compute-scr.out
+
+
+*/30 * * * * /usr/bin/compute-scr.sh ## Compute Scratch Space
+
+
+ {
+   "Name": "Compute Scratch",
+   "DisplayName": "Compute Scratch",
+   "Description":"Checking the Compute Scratch",
+   "ScriptLocation":"/usr/bin/compute-scr.py",
+   "Arguments": {
+                 }
+
+
+import os
+os.system("cat /usr/bin/compute-scr.out")
+
