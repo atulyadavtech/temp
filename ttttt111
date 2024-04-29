@@ -1,0 +1,1 @@
+qmgr -c "p n @default" > /root/node.output
