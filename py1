@@ -1,0 +1,34 @@
+#!/bin/env python
+'''
+Hook checks for user based SSH setup
+If public keys are not setup, then calls a helper script to setup passwordless SSH
+INSTALL:
+    create hook check_n_fix_ssh
+    set hook check_n_fix_ssh enabled = true
+    set hook check_n_fix_ssh event = queuejob
+    set hook check_n_fix_ssh event += modifyjob
+    import hook check_n_fix_ssh  application/x-python default check_n_fix_ssh.py
+    set hook check_n_fix_ssh alarm = 30
+    set hook check_n_fix_ssh debug = false
+    set hook check_n_fix_ssh fail_action = none
+'''
+
+import pbs
+import os
+import sys
+
+sshkeygen_script='/etc/profile.d/auto_ssh.sh'
+ssh_public_key='id_dsa.pub'
+
+try:
+  thisEvent = pbs.event()
+  thisjob = thisEvent.job
+  if not os.path.exists(os.path.expanduser('~' + thisEvent.requestor + '/.ssh/'+ ssh_public_key)):
+    try:
+      rcode = os.system('su - ' + thisEvent.requestor + ' -c . "' +sshkeygen_script +'"' )
+    except:
+      thisEvent.reject\
+      ("%s SSH Keys are not setup for the user. Jobs will fail. Please contact your administrator" \
+      %(thisEvent.hook_name))
+except SystemExit:
+  thisEvent.reject("%s Failed to run. Please contact your administrator" %(thisEvent.hook_name))
