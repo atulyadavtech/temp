@@ -1,0 +1,8 @@
+    create hook check_n_fix_ssh
+    set hook check_n_fix_ssh enabled = true
+    set hook check_n_fix_ssh event = queuejob
+    set hook check_n_fix_ssh event += modifyjob
+    import hook check_n_fix_ssh  application/x-python default check_n_fix_ssh.py
+    set hook check_n_fix_ssh alarm = 30
+    set hook check_n_fix_ssh debug = false
+    set hook check_n_fix_ssh fail_action = none
