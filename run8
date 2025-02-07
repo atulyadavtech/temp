@@ -1,0 +1,28 @@
+#!/bin/sh
+# saveAppdefAs.sh Glxspheres HyperMesh
+COPY_SRC=$1
+COPY_DEST=$2
+
+# Check if directory is a appdef
+if [ -d $COPY_DEST ];then
+ if [ -f $COPY_DEST/app-inp-$COPY_DEST.xml ];then
+  mv $COPY_DEST $COPY_DEST.bak
+ else
+  echo "Not a app-def folder"
+  exit 1
+ fi
+fi
+
+# Copy Folder
+cp -af $COPY_SRC $COPY_DEST
+
+# Rename files
+for i in `find $COPY_DEST -iname \*xml| xargs -i basename {}`; do
+ mv $2/$i $2/$(echo $i | sed -e "s/$1/$2/g")
+done
+
+
+# Rename Application Ids
+for i in `find $COPY_DEST -iname \*xml`; do
+ sed -i "s/$COPY_SRC/$COPY_DEST/g" $i
+done
